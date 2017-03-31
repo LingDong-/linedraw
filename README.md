@@ -2,6 +2,10 @@
 Convert images to vectorized line drawings for plotters.
 ![Alt text](/screenshots/1.png?raw=true "")
 
+- Exports polyline-only svg file with optimized stroke sequence for plotters;
+- Sketchy style powered by Perlin noise;
+- Contour-only or hatch-only modes.
+
 ## Dependencies
 Python 2, PIL/Pillow, numpy, OpenCV (Optional for better speed and results)
 
