@@ -45,5 +45,5 @@ lines = linedraw.sketch("path/to/img.jpg")  # return list of polylines, eg.
                                             
 linedraw.visualize(lines)                   # simulates plotter behavior
                                             # draw the lines in order using turtle graphics.
-``
+```
 
