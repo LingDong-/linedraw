@@ -1,6 +1,6 @@
 # linedraw
 Convert images to vectorized line drawings for plotters.
-![Alt text](/relative/path/to/img.jpg?raw=true "")
+![Alt text](/screenshots/1.png?raw=true "")
 
 ## Dependencies
 Python 2, PIL/Pillow, numpy, OpenCV (Optional for better speed and results)
