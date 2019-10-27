@@ -22,11 +22,11 @@ try:
     import numpy as np
     import cv2
 except:
-    print "Cannot import numpy/openCV. Switching to NO_CV mode."
+    print("Cannot import numpy/openCV. Switching to NO_CV mode.")
     no_cv = True
 
 def find_edges(IM):
-    print "finding edges..."
+    print("finding edges...")
     if no_cv:
         #appmask(IM,[F_Blur])
         appmask(IM,[F_SobelX,F_SobelY])
@@ -39,7 +39,7 @@ def find_edges(IM):
 
 
 def getdots(IM):
-    print "getting contour points..."
+    print("getting contour points...")
     PX = IM.load()
     dots = []
     w,h = IM.size
@@ -58,7 +58,7 @@ def getdots(IM):
     return dots
     
 def connectdots(dots):
-    print "connecting contour points..."
+    print("connecting contour points...")
     contours = []
     for y in range(len(dots)):
         for x,v in dots[y]:
@@ -91,7 +91,7 @@ def connectdots(dots):
 
 
 def getcontours(IM,sc=2):
-    print "generating contours..."
+    print("generating contours...")
     IM = find_edges(IM)
     IM1 = IM.copy()
     IM2 = IM.rotate(-90,expand=True).transpose(Image.FLIP_LEFT_RIGHT)
@@ -128,7 +128,7 @@ def getcontours(IM,sc=2):
 
 
 def hatch(IM,sc=16):
-    print "hatching..."
+    print("hatching...")
     PX = IM.load()
     w,h = IM.size
     lg1 = []
@@ -184,13 +184,13 @@ def sketch(path):
 
     lines = []
     if draw_contours:
-        lines += getcontours(IM.resize((resolution/contour_simplify,resolution/contour_simplify*h/w)),contour_simplify)
+        lines += getcontours(IM.resize((resolution//contour_simplify,resolution//contour_simplify*h//w)),contour_simplify)
     if draw_hatch:
-        lines += hatch(IM.resize((resolution/hatch_size,resolution/hatch_size*h/w)),hatch_size)
+        lines += hatch(IM.resize((resolution//hatch_size,resolution//hatch_size*h//w)),hatch_size)
 
     lines = sortlines(lines)
     if show_bitmap:
-        disp = Image.new("RGB",(resolution,resolution*h/w),(255,255,255))
+        disp = Image.new("RGB",(resolution,resolution*h//w),(255,255,255))
         draw = ImageDraw.Draw(disp)
         for l in lines:
             draw.line(l,(0,0,0),5)
@@ -199,13 +199,13 @@ def sketch(path):
     f = open(export_path,'w')
     f.write(makesvg(lines))
     f.close()
-    print len(lines), "strokes."
-    print "done."
+    print("strokes.")
+    print("done.")
     return lines
 
 
 def makesvg(lines):
-    print "generating svg file..."
+    print("generating svg file...")
     out = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">'
     for l in lines:
         l = ",".join([str(p[0]*0.5)+","+str(p[1]*0.5) for p in l])

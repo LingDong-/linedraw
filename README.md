@@ -1,20 +1,22 @@
 # linedraw
 Convert images to vectorized line drawings for plotters.
-![Alt text](/screenshots/1.png?raw=true "")
+![Alt text](./screenshots/1.png?raw=true "")
 
 - Exports polyline-only svg file with optimized stroke order for plotters;
 - Sketchy style powered by Perlin noise;
 - Contour-only or hatch-only modes.
 
 ## Dependencies
-Python 2, PIL/Pillow, numpy, OpenCV (Optional for better performance)
+Python 2 or 3, PIL/Pillow, numpy, OpenCV (Optional for better performance)
 
 ## Usage
 Convert an image to line drawing and export .SVG format:
+
 ```shell
 $ python linedraw.py -i input.jpg -o output.svg
 ```
 Command specs:
+
 ```
 usage: linedraw.py [-h] [-i [INPUT_PATH]] [-o [OUTPUT_PATH]] [-b] [-nc] [-nh]
                    [--no_cv] [--hatch_size [HATCH_SIZE]]
@@ -38,6 +40,7 @@ optional arguments:
                         Level of contour simplification. eg. 1, 2, 3
 ```
 Python:
+
 ```python
 import linedraw
 lines = linedraw.sketch("path/to/img.jpg")  # return list of polylines, eg.

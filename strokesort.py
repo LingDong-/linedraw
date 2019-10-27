@@ -4,7 +4,7 @@ from util import *
 
 
 def sortlines(lines):
-    print "optimizing stroke sequence..."
+    print("optimizing stroke sequence...")
     clines = lines[:]
     slines = [clines.pop(0)]
     while clines != []:
