@@ -175,7 +175,9 @@ def sketch(path):
         try:
             IM = Image.open(p)
             break
-        except:
+        except FileNotFoundError:
+            print("The Input File wasn't found. Check Path")
+            exit(0)
             pass
     w,h = IM.size
 
