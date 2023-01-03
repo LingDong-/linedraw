@@ -94,7 +94,7 @@ def getcontours(IM,sc=2):
     print("generating contours...")
     IM = find_edges(IM)
     IM1 = IM.copy()
-    IM2 = IM.rotate(-90,expand=True).transpose(Image.FLIP_LEFT_RIGHT)
+    IM2 = IM.rotate(-90,expand=True).transpose(Image.Transpose.FLIP_LEFT_RIGHT)
     dots1 = getdots(IM1)
     contours1 = connectdots(dots1)
     dots2 = getdots(IM2)
