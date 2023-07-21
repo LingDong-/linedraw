@@ -1,6 +1,6 @@
 from random import *
 from PIL import Image, ImageDraw, ImageOps
-from util import *
+from linedraw.util import *
 
 
 def sortlines(lines):
