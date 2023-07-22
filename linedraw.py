@@ -1,7 +1,8 @@
 import argparse
 
-from linedraw import sketch
-from linedraw.default import argument
+from line_draw import sketch
+from line_draw.default import argument
+from line_draw.strokesort import visualize
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Convert image to vectorized line drawing for plotters.')
@@ -41,6 +42,10 @@ if __name__ == '__main__':
                         default=argument.contour_simplify, action='store', nargs='?', type=int,
                         help='Level of contour simplification. eg. 1, 2, 3')
 
+    parser.add_argument('-v', '--visualize', dest='visualize',
+                        const=True, default=False, action='store_const',
+                        help='Visualize the output using turtle')
+
     parser.add_argument('--save-settings', dest='save_settings',
                         const=not argument.save_settings, default=argument.save_settings, action='store_const',
                         help='To Save the settings to a json file')
@@ -57,4 +62,7 @@ if __name__ == '__main__':
     argument.no_cv = args.no_cv
     argument.resolution = args.resolution
     argument.save_settings = args.save_settings
-    sketch(input_path, export_path)
+    lines = sketch(input_path, export_path)
+    if args.visualize:
+        if lines:
+            visualize(lines)

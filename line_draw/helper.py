@@ -1,12 +1,12 @@
 from PIL import Image, ImageOps, ImageDraw
-import linedraw.perlin as perlin
+import line_draw.perlin as perlin
 from datetime import datetime
 import os
 
-from linedraw.filters import appmask, F_SobelX, F_SobelY
-from linedraw.default import argument
-from linedraw.util import distsum, is_image_file, extract_file_name_and_extension
-from linedraw.strokesort import sortlines
+from line_draw.filters import appmask, F_SobelX, F_SobelY
+from line_draw.default import argument
+from line_draw.util import distsum, is_image_file, extract_file_name_and_extension
+from line_draw.strokesort import sortlines
 
 
 def sketch(input_path, output_path:str):
