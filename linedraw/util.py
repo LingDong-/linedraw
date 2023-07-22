@@ -1,3 +1,4 @@
+import os
 def midpt(*args):
     xs,ys = 0,0
     for p in args:
@@ -7,3 +8,15 @@ def midpt(*args):
 
 def distsum(*args):
     return sum([ ((args[i][0]-args[i-1][0])**2 + (args[i][1]-args[i-1][1])**2)**0.5 for i in range(1,len(args))])
+
+
+def is_image_file(file_path):
+    image_extensions = ['.jpg', '.jpeg', '.png']
+    tmp,ext = extract_file_name_and_extension(file_path)
+    return ext in image_extensions
+
+
+def extract_file_name_and_extension(file_path):
+    file_name_with_extension = os.path.basename(file_path)
+    file_name, file_extension = os.path.splitext(file_name_with_extension)
+    return file_name, file_extension

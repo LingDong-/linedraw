@@ -1,14 +1,31 @@
 from PIL import Image, ImageOps, ImageDraw
 import linedraw.perlin as perlin
+from datetime import datetime
+import os
 
 from linedraw.filters import appmask, F_SobelX, F_SobelY
 from linedraw.default import argument
-from linedraw.util import distsum
+from linedraw.util import distsum, is_image_file, extract_file_name_and_extension
 from linedraw.strokesort import sortlines
 
 
-def sketch(input_path, output_path):
+def sketch(input_path, output_path:str):
     IMAGE = None
+
+    if not is_image_file(input_path):
+        return print("Please provide the path for an image.")
+
+    out_file, out_ext = extract_file_name_and_extension(output_path)
+
+    if not out_file:
+        in_file, in_ext = extract_file_name_and_extension(input_path)
+        out_ext = '.svg'
+        if not output_path.endswith('/'):
+            output_path += '/'
+        output_path += in_file + out_ext
+
+    if out_ext != '.svg':
+         return print("Currently we can only save as svg file")
 
     try:
         IMAGE = Image.open(input_path)
@@ -39,10 +56,24 @@ def sketch(input_path, output_path):
             draw.line(l, (0, 0, 0), 5)
         disp.show()
 
+    # if out_ext != '.svg':
+    #     now = datetime.now()
+    #     svg_path = output_path.rsplit('/', 1)[0] + now.strftime("%Y%m%d%H%M%S%f") + '.svg'
+    # else:
+    #     svg_path = output_path
+
     file = open(output_path, 'w')
     file.write(make_svg(lines))
     file.close()
+
+    # if out_ext != '.svg':
+    #     if not is_image_file(output_path):
+    #         return "Output path is not an image path"
+    #     rasterise_image(svg_path,output_path)
+    #     os.remove(svg_path)
     print(len(lines), "strokes.")
+    if argument.save_settings:
+        argument.save(os.path.dirname(output_path) + '/settings.json')
     print("done.")
     return lines
 
@@ -197,3 +228,8 @@ def make_svg(lines):
         out += '<polyline points="' + l + '" stroke="black" stroke-width="2" fill="none" />\n'
     out += '</svg>'
     return out
+
+
+def rasterise_image(svg_image, raster_image):
+    print("Converting image....")
+    # to be implemented

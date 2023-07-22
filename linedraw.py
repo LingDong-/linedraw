@@ -14,31 +14,36 @@ if __name__ == '__main__':
                         help='Output image path')
 
     parser.add_argument('-r', '--resolution', dest='resolution',
-                        default=argument.show_bitmap, action='store_const',
+                        default=argument.resolution, action='store', nargs='?', type=int,
                         help='Resolution of the output image')
 
-    parser.add_argument('-b', '--show_bitmap', dest='show_bitmap',
+    parser.add_argument('-b', '--show-bitmap', dest='show_bitmap',
                         const=not argument.show_bitmap, default=argument.show_bitmap, action='store_const',
                         help='Display bitmap preview.')
 
-    parser.add_argument('-nc', '--no_contour', dest='no_contour',
+    parser.add_argument('-nc', '--no-contour', dest='no_contour',
                         const=argument.draw_contours, default=not argument.draw_contours, action='store_const',
                         help="Don't draw contours.")
 
-    parser.add_argument('-nh', '--no_hatch', dest='no_hatch',
+    parser.add_argument('-nh', '--no-hatch', dest='no_hatch',
                         const=argument.draw_hatch, default=not argument.draw_hatch, action='store_const',
                         help='Disable hatching.')
 
-    parser.add_argument('--no_cv', dest='no_cv',
+    parser.add_argument('--no-cv', dest='no_cv',
                         const=not argument.no_cv, default=argument.no_cv, action='store_const',
                         help="Don't use openCV.")
 
-    parser.add_argument('--hatch_size', dest='hatch_size',
+    parser.add_argument('--hatch-size', dest='hatch_size',
                         default=argument.hatch_size, action='store', nargs='?', type=int,
                         help='Patch size of hatches. eg. 8, 16, 32')
-    parser.add_argument('--contour_simplify', dest='contour_simplify',
+
+    parser.add_argument('--contour-simplify', dest='contour_simplify',
                         default=argument.contour_simplify, action='store', nargs='?', type=int,
                         help='Level of contour simplification. eg. 1, 2, 3')
+
+    parser.add_argument('--save-settings', dest='save_settings',
+                        const=not argument.save_settings, default=argument.save_settings, action='store_const',
+                        help='To Save the settings to a json file')
 
     args = parser.parse_args()
 
@@ -51,4 +56,5 @@ if __name__ == '__main__':
     argument.show_bitmap = args.show_bitmap
     argument.no_cv = args.no_cv
     argument.resolution = args.resolution
+    argument.save_settings = args.save_settings
     sketch(input_path, export_path)
