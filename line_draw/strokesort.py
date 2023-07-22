@@ -1,6 +1,6 @@
 from random import *
 from PIL import Image, ImageDraw, ImageOps
-from util import *
+from line_draw.util import *
 
 
 def sortlines(lines):
@@ -38,8 +38,8 @@ def visualize(lines):
     turtle.mainloop()
 
 if __name__=="__main__":
-    import linedraw
+    import line_draw
     #linedraw.draw_hatch = False
-    lines = linedraw.sketch("Lenna")
+    lines = line_draw.sketch("Lenna")
     #lines = sortlines(lines)
     visualize(lines)
